@@ -1,9 +1,0 @@
-{
-  "version": 1,
-  "interval": 600,
-  "worlds": [
-    "creative"
-  ],
-  "server_folder": "/home/omgimanerd/minecraft/spigot-server",
-  "backups_folder": "/home/omgimanerd/minecraft/spigot-server/backups"
-}
