@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "worlds": [
+    "creative",
+    "creative_freebuild"
+  ],
+  "server_folder": "/root/creatopolis",
+  "backups_folder": "/root/creatopolis/backups"
+}
