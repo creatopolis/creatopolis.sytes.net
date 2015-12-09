@@ -4,8 +4,8 @@
  */
 
 @font-face {
-  font-family: Minecrafter;
-  url: url('/static/fonts/minecrafter_alt.ttf');
+  font-family: "Minecrafter";
+  src: url('../fonts/minecrafter_reg.ttf');
 }
 
 html, body {
@@ -21,21 +21,43 @@ html, body {
 body {
   background: url('/static/img/bookshelf.png');
   background-size: 64px 64px;
-  font-family: Minecrafter, Verdana, sans-serif;
+  font-family: "Minecrafter", Verdana, sans-serif;
 }
 
 .container {
-  padding: 100px;
   text-align: center;
 }
 
 h1.title {
-  width: 600px;
+  width: 700px;
   font-size: 50px;
+  line-height: 50px;
+  margin: 100px auto;
   text-align: center;
 
-  background: rgba(204, 204, 204, 1);
-  -webkit-box-shadow: 0px 0px 100px 50px rgba(204,204,204,1);
-  -moz-box-shadow: 0px 0px 100px 50px rgba(204,204,204,1);
+  background: rgba(204, 204, 204, .95);
+
+  -webkit-box-shadow: 0px 0px 100px 50px rgba(204, 204, 204, 1);
+  -moz-box-shadow: 0px 0px 100px 50px rgba(204, 204, 204, 1);
   box-shadow: 0px 0px 100px 50px rgba(204,204,204,1);
+}
+
+h2.ip {
+  width: 550px;
+  font-size: 30px;
+  line-height: 30px;
+  margin: 150px auto;
+  text-align: center;
+
+  background: rgba(204, 204, 204, .95);
+
+  -webkit-box-shadow: 0px 0px 100px 50px rgba(204, 204, 204, 1);
+  -moz-box-shadow: 0px 0px 100px 50px rgba(204, 204, 204, 1);
+  box-shadow: 0px 0px 100px 50px rgba(204,204,204,1);
+}
+
+.assets {
+}
+
+.assets img {
 }
