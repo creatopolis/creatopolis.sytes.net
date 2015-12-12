@@ -3,14 +3,25 @@
  * @author Alvin Lin (alvin.lin.dev@gmail.com)
  */
 
-
-function check_upstate() {
+/**
+ * This function sends an AJAX request to the server that queries the server
+ * and returns data on the server's state, player count, etc.
+ */
+function checkUpstate() {
+  $("#server-state")
+    .empty()
+    .add("<span class='fa fa-spinner fa-spin fa-2x'></span>")
+    .addClass("loading");
   $.getJSON("/check_upstate", function(data) {
     console.log(data);
     if (data.online) {
-      $("#upstate").text("Server online!").css("color", "green");
+      $("#server-state")
+        .empty()
+        .add($("<span>Server online!</span>").css("color", "green"));
     } else {
-      $("#upstate").text("Server offline!").css("color", "red");
+      $("#server-state")
+        .empty()
+        .text($("<span>Server offline!</span>").css("color", "red"));
     }
   });
 }

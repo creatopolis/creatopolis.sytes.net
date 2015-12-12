@@ -1,4 +1,4 @@
-# Web application
+3# Web application
 from flask import Flask
 from flask import redirect, render_template
 from werkzeug.contrib.fixers import ProxyFix
@@ -31,7 +31,7 @@ def check_upstate():
 
   return json.dumps(data)
 
-@app.route("/*")
+@app.errorhandler(404)
 def catchall():
   return redirect("/")
  

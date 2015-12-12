@@ -28,7 +28,7 @@ body {
   text-align: center;
 }
 
-h1.title {
+.title {
   width: 700px;
   font-size: 50px;
   line-height: 50px;
@@ -42,7 +42,7 @@ h1.title {
   box-shadow: 0px 0px 100px 50px rgba(204,204,204,1);
 }
 
-h2.ip {
+.ip {
   width: 550px;
   font-size: 30px;
   line-height: 30px;
@@ -54,10 +54,6 @@ h2.ip {
   -webkit-box-shadow: 0px 0px 100px 50px rgba(204, 204, 204, 1);
   -moz-box-shadow: 0px 0px 100px 50px rgba(204, 204, 204, 1);
   box-shadow: 0px 0px 100px 50px rgba(204,204,204,1);
-}
-
-#upstate {
-  color: green;
 }
 
 .assets {
