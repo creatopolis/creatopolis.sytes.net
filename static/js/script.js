@@ -10,24 +10,23 @@
 function checkUpstate() {
   $("#server-state")
     .empty()
-    .add("<span class='fa fa-spinner fa-spin fa-2x'></span>")
-    .addClass("loading");
+    .append($("<span></span>").addClass("fa fa-spinner fa-spin fa-2x"));
   $.getJSON("/check_upstate", function(data) {
-    console.log(data);
     if (data.online) {
       $("#server-state")
         .empty()
-        .add($("<span>Server online!</span>").css("color", "green"));
+        .append(
+          $("<span></span>").text("Server online!").css("color", "green"));
     } else {
       $("#server-state")
         .empty()
-        .text($("<span>Server offline!</span>").css("color", "red"));
+        .append($("<span></span>").text("Server offline!").css("color", "red"));
     }
   });
 }
 
 $(document).ready(function() {
-  check_upstate();
+  checkUpstate();
 
-  $("#check_upstate").click(check_upstate);
+  $("#check_upstate").click(checkUpstate);
 });
