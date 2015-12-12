@@ -6,6 +6,7 @@
 import datetime
 import json
 import os
+import re
 import sys
 import zipfile
 
@@ -22,7 +23,8 @@ def get_config():
   try:
     with open(config_filepath) as config_file:
       config = json.loads(config_file.read())
-    test = (config["worlds"], config["server_folder"], config["backups_folder"])
+    test = (config["worlds"], config["server_folder"], config["backups_folder"],
+            config["keep_time"])
   except:
     raise ValueError("Invalid config.json!")
   return config
@@ -50,11 +52,32 @@ def get_backup_name(worldname):
   today = datetime.datetime.today()
   return today.strftime(worldname + "_backup_%m-%d-%Y_%H-%M-%S.zip")
 
+def should_remove_backup(backup_name, keep_time):
+  """
+  This function returns true if the backup with the given name should be deleted
+  given the amount of time that backups are kept for in days.
+  """
+  try:
+    backup_dateparse = re.search("([0-9]{2})-([0-9]{2})-([0-9]{4})", backup_name)
+    today = datetime.date.today()
+    backup_date = datetime.date(int(backup_dateparse.group(3)),
+                                int(backup_dateparse.group(1)),
+                                int(backup_dateparse.group(2)))
+    return (today - backup_date).days > keep_time
+  except:
+    return False
+
 def main():
   """
   Main function, reads the config and makes backups of the specified folders.
+  Checks and removes backups that are too old.
   """
   config = get_config()
+  for f in list_files_all(config["backups_folder"]):
+    if should_remove_backup(f, config["keep_time"]):
+      print "Removing %s" % f
+      os.remove(f)
+      
   for world in config["worlds"]:
     backup_name = get_backup_name(world)
     full_backup_path = "%s/%s" % (config["backups_folder"], backup_name)
