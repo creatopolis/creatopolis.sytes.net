@@ -23,34 +23,37 @@ def get_config():
   try:
     with open(config_filepath) as config_file:
       config = json.loads(config_file.read())
-    test = (config["worlds"], config["server_folder"], config["backups_folder"],
+    test = (config["folders"], config["server_folder"],
+            config["backups_folder"], config["ignore_files"],
             config["keep_time"])
   except:
     raise ValueError("Invalid config.json!")
   return config
 
-def list_files_all(path):
+def list_files_all(path, ignore_files=[]):
   """
-  Given a path, this function recursively goes lists the directory"s contents.
+  Given a path, this function recursively goes lists the directory's contents,
+  ignoring all specified file extensions.
   """
   files = []
   for name in os.listdir(path):
     pathname = os.path.join(path, name)
     if os.path.isfile(pathname):
-      files.append(os.path.abspath(pathname))
+      if pathname.split(".")[-1] not in ignore_files:
+        files.append(os.path.abspath(pathname))
     else:
       subfiles = list_files_all(pathname)
       for subfile in subfiles:
         files.append(os.path.abspath(subfile))
   return files
 
-def get_backup_name(worldname):
+def get_backup_name(foldername):
   """
-  This function generates the name of the backup given the name of the world for
-  which the backup is being created.
+  This function generates the name of the backup given the name of the folder
+  for which the backup is being created.
   """
   today = datetime.datetime.today()
-  return today.strftime(worldname + "_backup_%m-%d-%Y_%H-%M-%S.zip")
+  return today.strftime(foldername + "_backup_%m-%d-%Y_%H-%M-%S.zip")
 
 def should_remove_backup(backup_name, keep_time):
   """
@@ -58,7 +61,8 @@ def should_remove_backup(backup_name, keep_time):
   given the amount of time that backups are kept for in days.
   """
   try:
-    backup_dateparse = re.search("([0-9]{2})-([0-9]{2})-([0-9]{4})", backup_name)
+    backup_dateparse = re.search("([0-9]{2})-([0-9]{2})-([0-9]{4})",
+                                 backup_name)
     today = datetime.date.today()
     backup_date = datetime.date(int(backup_dateparse.group(3)),
                                 int(backup_dateparse.group(1)),
@@ -73,17 +77,17 @@ def main():
   Checks and removes backups that are too old.
   """
   config = get_config()
-  for f in list_files_all(config["backups_folder"]):
+  for f in list_files_all(config["backups_folder"], config["ignore_files"]):
     if should_remove_backup(f, config["keep_time"]):
       print "Removing %s" % f
       os.remove(f)
       
-  for world in config["worlds"]:
-    backup_name = get_backup_name(world)
-    full_backup_path = "%s/%s" % (config["backups_folder"], backup_name)
-    with zipfile.ZipFile(full_backup_path, "w") as newzip:
-      full_world_path = "%s/%s" % (config["server_folder"], world)
-      for filename in list_files_all(full_world_path):
+  for folder in config["folders"]:
+    backup_name = get_backup_name(folder)
+    full_backup_name = "%s/%s" % (config["backups_folder"], backup_name)
+    with zipfile.ZipFile(full_backup_name, "w") as newzip:
+      full_folder_path = "%s/%s" % (config["server_folder"], folder)
+      for filename in list_files_all(full_folder_path):
         newzip.write(filename, filename[len(config["server_folder"]) + 1:])
     print "Successfully made %s" % backup_name
 

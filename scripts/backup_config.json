@@ -1,10 +1,15 @@
 {
-  "version": 1,
-  "worlds": [
+  "version": 2,
+  "folders": [
     "creative",
-    "creative_freebuild"
+    "creative_freebuild",
+    "plugins"
   ],
   "server_folder": "/root/creatopolis",
   "backups_folder": "/root/creatopolis/backups",
+  "ignore_files": [
+    "jar",
+    "db"
+  ],
   "keep_time": 7
 }
