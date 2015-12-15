@@ -10,11 +10,12 @@
 function checkUpstate() {
   $("#server-status-spinner").show();
   $("#server-status").hide();
+  $("#server-players").empty().hide();
+  $("#server-check-upstate").hide();
   $.getJSON("/check_upstate", function(data) {
     if (data.online) {
-      $("#server-status").text("Server online").css("color", "#35a720").show();
-      $("#server-players").empty();
-      $("#server-players").append($("<li></li>").text("Players Online:"));
+      $("#server-status").show().text("Server online").css("color", "#35a720");
+      $("#server-players").show().append($("<li></li>").text("Players Online:"));
       data.players_online.forEach(function(player) {
         $("#server-players").append($("<li></li>").text(player));
       });
@@ -22,11 +23,12 @@ function checkUpstate() {
       $("#server-status").text("Server offline").css("color", "#ff3535").show();
     }
     $("#server-status-spinner").hide();
+    $("#server-check-upstate").show();
   });
 }
 
 $(document).ready(function() {
   checkUpstate();
 
-  $("#checkUpstate").click(checkUpstate);
+  $("#server-check-upstate").click(checkUpstate);
 });
