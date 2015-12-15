@@ -14,17 +14,17 @@ import os
 import sys
 
 app = Flask(__name__)
-root_app_path = os.path.dirname(__name__)
+root_app_path = os.path.dirname(os.path.realpath(__name__))
 
 @app.route("/")
 def index():
   return render_template("index.html")
 
-@app.route("/resource_pack")
+@app.route("/resourcepack")
 def resource_pack():
-  print root_app_path
-  return None
-  return send_file("%s%s" % (root_app_path, "/resourcepack/ModernHD1.8.8.zip"))
+  return send_file("%s%s" % (root_app_path, "/resourcepack/ModernHD1.8.8.zip"),
+                   as_attachment=True,
+                   attachment_filename="ModernHD1.8.8.zip")
 
 @app.route("/check_upstate")
 def check_upstate():
