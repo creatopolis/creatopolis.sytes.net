@@ -8,20 +8,16 @@
  * and returns data on the server's state, player count, etc.
  */
 function checkUpstate() {
-  $("#server-state")
-    .empty()
-    .append($("<span></span>").addClass("fa fa-spinner fa-spin fa-2x"));
+  $("#server-status-spinner").show();
   $.getJSON("/check_upstate", function(data) {
     if (data.online) {
-      $("#server-state")
-        .empty()
-        .append(
-          $("<span></span>").text("Server online!").css("color", "green"));
+      $("#server-status").text("Server online!").css("color", "#35a720");
+      // For each player, add them to the <ul>
+      // $("#server-players")
     } else {
-      $("#server-state")
-        .empty()
-        .append($("<span></span>").text("Server offline!").css("color", "red"));
+      $("#server-state").text("Server offline!").css("color", "#ff3535"));
     }
+    $("#server-status-spinner").hide();
   });
 }
 

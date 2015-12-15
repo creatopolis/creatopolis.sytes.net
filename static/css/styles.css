@@ -5,7 +5,7 @@
 
 @font-face {
   font-family: "Minecrafter";
-  src: url('../fonts/minecrafter_reg.ttf');
+  src: url('../fonts/minecrafter.ttf');
 }
 
 html, body {
@@ -54,6 +54,14 @@ body {
   -webkit-box-shadow: 0px 0px 100px 50px rgba(204, 204, 204, 1);
   -moz-box-shadow: 0px 0px 100px 50px rgba(204, 204, 204, 1);
   box-shadow: 0px 0px 100px 50px rgba(204,204,204,1);
+}
+
+#server-state {
+  width: 600px;
+  
+  ul {
+    list-style-type: none;
+  }
 }
 
 .assets {
