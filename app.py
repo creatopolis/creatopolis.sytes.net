@@ -14,7 +14,7 @@ import os
 import sys
 
 app = Flask(__name__)
-root_app_path = os.path.realpath(sys.argv[0])
+root_app_path = os.path.dirname(__name__)
 
 @app.route("/")
 def index():
@@ -22,6 +22,8 @@ def index():
 
 @app.route("/resource_pack")
 def resource_pack():
+  print root_app_path
+  return None
   return send_file("%s%s" % (root_app_path, "/resourcepack/ModernHD1.8.8.zip"))
 
 @app.route("/check_upstate")
