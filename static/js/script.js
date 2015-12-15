@@ -9,13 +9,17 @@
  */
 function checkUpstate() {
   $("#server-status-spinner").show();
+  $("#server-status").hide();
   $.getJSON("/check_upstate", function(data) {
     if (data.online) {
-      $("#server-status").text("Server online!").css("color", "#35a720");
-      // For each player, add them to the <ul>
-      // $("#server-players")
+      $("#server-status").text("Server online").css("color", "#35a720").show();
+      $("#server-players").empty();
+      $("#server-players").append($("<li></li>").text("Players Online:"));
+      data.players_online.forEach(function(player) {
+        $("#server-players").append($("<li></li>").text(player));
+      });
     } else {
-      $("#server-state").text("Server offline!").css("color", "#ff3535"));
+      $("#server-status").text("Server offline").css("color", "#ff3535").show();
     }
     $("#server-status-spinner").hide();
   });
