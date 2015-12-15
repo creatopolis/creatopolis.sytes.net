@@ -28,5 +28,5 @@ function checkUpstate() {
 $(document).ready(function() {
   checkUpstate();
 
-  $("#check_upstate").click(checkUpstate);
+  $("#checkUpstate").click(checkUpstate);
 });
