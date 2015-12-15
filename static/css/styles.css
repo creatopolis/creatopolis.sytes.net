@@ -30,10 +30,11 @@ body {
 
 .server-state {
   position: fixed;
-  background: url("/static/img/planks_birch.png");
+  width: 250px;
   left: 0;
   top: 10%;
   padding: 20px;
+  background: url("/static/img/planks_birch.png");
 }
 
 .server-state ul {
