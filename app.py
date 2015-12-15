@@ -4,19 +4,25 @@
 # Author: Alvin Lin (alvin.lin.dev@gmail.com)
 
 from flask import Flask
-from flask import redirect, render_template
+from flask import redirect, render_template, send_file
 from werkzeug.contrib.fixers import ProxyFix
 
 from mcstatus import MinecraftServer
 
 import json
+import os
 import sys
 
 app = Flask(__name__)
+root_app_path = os.path.realpath(sys.argv[0])
 
 @app.route("/")
 def index():
   return render_template("index.html")
+
+@app.route("/resource_pack")
+def resource_pack():
+  return send_file("%s%s" % (root_app_path, "/resourcepack/ModernHD1.8.8.zip"))
 
 @app.route("/check_upstate")
 def check_upstate():
