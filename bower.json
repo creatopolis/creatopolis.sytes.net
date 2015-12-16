@@ -1,0 +1,23 @@
+{
+  "name": "creatopolis.sytes.net",
+  "homepage": "https://creatopolis.sytes.net",
+  "authors": [
+    "Alvin Lin <alvin.lin.dev@gmail.com>"
+  ],
+  "description": "Creatopolis Web Portal",
+  "main": "app.py",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "font-awesome": "fontawesome#~4.5.0"
+  }
+}

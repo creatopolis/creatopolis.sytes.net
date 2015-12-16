@@ -40,6 +40,12 @@ def check_upstate():
     data["plugins"] = query.software.plugins
   except:
     data["online"] = False
+    # Debug dummy information for running under debug for styling testing.
+    if app.debug:
+      data["players_online"] = ["testname1", "testname2"]
+      data["players_max"] = 20
+      data["version"] = "CraftBukkit 1.8.8"
+      data["plugins"] = ["WorldEdit", "WorldGuard"]
 
   return json.dumps(data)
 
