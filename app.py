@@ -3,17 +3,17 @@
 # information.
 # Author: Alvin Lin (alvin.lin.dev@gmail.com)
 
-from flask import Flask
-from flask import redirect, render_template, send_file
-from werkzeug.contrib.fixers import ProxyFix
-
 from mcstatus import MinecraftServer
+from flask import Flask
+from flask import redirect, render_template, request, send_file
+from werkzeug.contrib.fixers import ProxyFix
 
 import json
 import os
 import sys
 
 app = Flask(__name__)
+
 root_app_path = os.path.dirname(os.path.realpath(__name__))
 
 @app.route("/")
@@ -26,11 +26,27 @@ def resource_pack():
                    as_attachment=True,
                    attachment_filename="ModernHD1.8.8.zip")
 
+@app.route("/ticket")
+def ticket():
+  with open('tickets.log', 'a') as tickets:
+    tickets.write(request.args.get('ticket', ''))
+  return redirect("/")
+
 @app.route("/check_upstate")
 def check_upstate():
-  server = MinecraftServer("localhost", 25565)
-
   data = {}
+
+  # If the app has been started in debug mode, return dummy data.
+  if app.debug:
+    data["online"] = True
+    data["players_online"] = ["testname1", "testname2"]
+    data["players_max"] = 20
+    data["version"] = "CraftBukkit 1.8.8"
+    data["plugins"] = ["WorldEdit", "WorldGuard"]
+    return json.dumps(data)
+
+  # Otherwise, an actual server query should be made.
+  server = MinecraftServer("localhost", 25565)
   try:
     query = server.query()
     data["online"] = True
@@ -40,13 +56,6 @@ def check_upstate():
     data["plugins"] = query.software.plugins
   except:
     data["online"] = False
-    # Debug dummy information for running under debug for styling testing.
-    if app.debug:
-      data["players_online"] = ["testname1", "testname2"]
-      data["players_max"] = 20
-      data["version"] = "CraftBukkit 1.8.8"
-      data["plugins"] = ["WorldEdit", "WorldGuard"]
-
   return json.dumps(data)
 
 app.wsgi_app = ProxyFix(app.wsgi_app)
