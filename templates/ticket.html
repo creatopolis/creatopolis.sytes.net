@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<form action="/ticket" method="POST">
+  <input type="text" name="username" placeholder="Username" />
+  <textarea name="ticket">
+  </textarea>
+  <button type="submit">Submit</button>
+</form>
+{% endblock %}

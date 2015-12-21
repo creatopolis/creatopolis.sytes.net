@@ -26,11 +26,15 @@ def resource_pack():
                    as_attachment=True,
                    attachment_filename="ModernHD1.8.8.zip")
 
-@app.route("/ticket")
+@app.route("/ticket", methods=["GET", "POST"])
 def ticket():
-  with open('tickets.log', 'a') as tickets:
-    tickets.write(request.args.get('ticket', ''))
-  return redirect("/")
+  if request.method == "GET":
+    return render_template("ticket.html")
+  else:
+    print request.form.get("ticket", "")
+    with open("tickets.log", "a") as tickets:
+      tickets.write(request.form.get("ticket", ""))
+    return redirect("/")
 
 @app.route("/check_upstate")
 def check_upstate():

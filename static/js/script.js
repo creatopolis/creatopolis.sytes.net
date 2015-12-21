@@ -14,7 +14,7 @@ function checkUpstate() {
   $("#server-check-upstate").hide();
   $.getJSON("/check_upstate", function(data) {
     if (data.online) {
-      $("#server-status").show().text("Server online").css("color", "#35a720");
+      $("#server-status").show().text("Server online").css("color", "#006600");
       $("#server-players").show().append($("<li></li>").text("Players Online:"));
       data.players_online.forEach(function(player) {
         $("#server-players").append($("<li></li>").text(player));

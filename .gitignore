@@ -1,5 +1,5 @@
 /env
-/logs
 /resourcepack/assets
 /static/bower
 *.pyc
+*.log

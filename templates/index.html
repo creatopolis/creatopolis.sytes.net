@@ -1,46 +1,21 @@
-<!DOCTYPE html>
+{% extends "layout.html" %}
 
-<html>
+{% block content %}
+<h1 class="title">Creatopolis Server</h1>
 
-  <head>
-    <title>Creatopolis</title>
-    <link rel="stylesheet"
-          href="/static/bower/font-awesome/css/font-awesome.css" />
-    <link rel="stylesheet" type="text/css"
-          href="/static/css/styles.css" />
+<h2 class="ip">Join at creatopolis.sytes.net</h2>
 
-    <script src="/static/bower/jquery/dist/jquery.min.js"></script>
-    <script src="/static/js/script.js"></script>
-  </head>
-
-  <body>
-    <div class="container">
-
-      <div class="server-state">
-        <div id="server-status-spinner" class="fa fa-spinner fa-spin fa-2x"></div>
-        <div id="server-status"></div>
-        <ul id="server-players"></ul>
-        <button type="button" id="server-check-upstate">Refresh</button>
-      </div>
-
-      <h1 class="title">Creatopolis Server</h1>
-
-      <h2 class="ip">Join at creatopolis.sytes.net</h2>
-
-      <div class="resource-pack">
-        We recommend using the
-        <a href="/resourcepack" download>
-          Modern HD pack by mikeyto1o
-        </a>
-        on our server.
-        <br />
-        <a href="http://www.planetminecraft.com/texture_pack/modern-hd-pack-64x-ctm-better-skies/">
-          Original Link
-        </a>
+<div class="resource-pack">
+  We recommend using the
+  <a href="/resourcepack" download>
+    Modern HD pack by mikeyto1o
+  </a>
+  on our server.
+  <br />
+  <a href="http://www.planetminecraft.com/texture_pack/modern-hd-pack-64x-ctm-better-skies/">
+    Original Link
+  </a>
           
-      </div>
+</div>
 
-    </div>
-  </body>
-
-</html>
+{% endblock %}

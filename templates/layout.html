@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+    <title>Creatopolis</title>
+    <link rel="stylesheet" type="text/css"
+          href="/static/css/styles.css" />
+    <link rel="stylesheet"
+          href="/static/bower/font-awesome/css/font-awesome.css" />
+
+    <script src="/static/bower/jquery/dist/jquery.min.js"></script>
+    <script src="/static/js/script.js"></script>
+  </head>
+
+  <body>
+    <div class="server-state">
+      <a href="/">Homepage</a>
+      <br />
+      <a href="/ticket">Submit a Ticket</a>
+      <br />
+      <hr />
+      <div id="server-status-spinner" class="fa fa-spinner fa-spin fa-2x"></div>
+      <div id="server-status"></div>
+      <ul id="server-players"></ul>
+      <button type="button" id="server-check-upstate">Refresh</button>
+    </div>
+
+    <div class="container">
+      {% block content %}
+      {% endblock %}
+    </div>
+  </body>
+
+</html>
